@@ -8,7 +8,7 @@ function Content() {
                 <div className="row mt-5">
                     <div className="col-lg-8">
                         <div className="card text-bg-dark">
-                            <img src={ImageContent1} className="img-fluid"  alt="" srcset=""  />
+                            <img src={ImageContent1} className="img-fluid"  alt="" srcSet=""  />
                             <div className="card-img-overlay">
                                 <div className="d-flex align-items-start flex-column mt-auto" style={{ height: '350px' }}>
                                     <button className="mt-auto p-2 btn btn-danger btn-lg mb-4">Senin, 03 JAN 2023</button>

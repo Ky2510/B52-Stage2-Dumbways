@@ -10,7 +10,7 @@ function Navbar() {
         <>
         <nav className="navbar navbar-expand-lg bg-dark px-5" style={{ padding: '11px' }}>
             <div className="container-fluid">
-                <a className="navbar-brand text-light fw-semibold fs-3" href="#"> <img src={Logo} width="50" alt="" /> PEMILU PRESIDEN DUMBWAYS.ID</a>
+                <a className="navbar-brand text-light fw-semibold fs-3" href="/"> <img src={Logo} width="50" alt="" /> PEMILU PRESIDEN DUMBWAYS.ID</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -25,7 +25,7 @@ function Navbar() {
                         </li>
                         <li className='nav-link text-light fs-4'>|</li>
                         <li className="nav-item">
-                            <a className="nav-link text-light fs-4" href="#">Voting</a>
+                            <a className="nav-link text-light fs-4" href="/votes">Voting</a>
                         </li>
                         {
                             inLogin ?
@@ -36,14 +36,20 @@ function Navbar() {
                                                 R 
                                             </button>
                                             <ul className="dropdown-menu">
-                                                <li><a className="btn-light px-3 rounded-3 text-dark text-decoration-none"
-                                                    onClick={loggedIn}>Logout</a></li>
+                                                <li>
+                                                    <a href="/dashboard" className="btn-light px-3 rounded-3 text-dark text-decoration-none">Dashboad</a>
+                                                </li>
+                                                <li>
+                                                    <a className="btn-light px-3 rounded-3 text-dark text-decoration-none"
+                                                    onClick={loggedIn}>Logout</a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </li>
                                     : 
                                     <li className="nav-link">
-                                        <button className="btn-light btn-lg fs-4 px-3 rounded-3" onClick={loggedIn}>Login</button>
+                                        <a className="btn btn-light btn-md  px-3 rounded-3" onClick={loggedIn}>Login</a>
+                                        <a href="/register"  className="btn btn-light mx-2 btn-md px-3 rounded-3">Register</a>
                                     </li>
                         }
                     </ul>

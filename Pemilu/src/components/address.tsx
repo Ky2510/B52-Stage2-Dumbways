@@ -2,7 +2,7 @@ import Logo from "../assets/logoaddress.png"
 function  Address() {
     return (
         <>
-            <div className="card bg-dark">
+            <div className="card bg-dark ">
                 <div className="card-body">
                     <div className="container d-flex gap-5">
                         <img src={Logo} alt="" />

@@ -1,6 +1,8 @@
 import TitleDetailContent from "../components/details/title"
 import ImageDetailContent from "../components/details/image"
 import DescriptionDetailContent from "../components/details/description"
+import Address from '../components/address'
+import Footer from '../components/footer'
 
 function Detail() {
     return (
@@ -16,6 +18,8 @@ function Detail() {
                     </div>
                 </div>
             </div>
+            <Address />
+            <Footer />
         </>
     )
 }

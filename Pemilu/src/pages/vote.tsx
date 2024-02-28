@@ -1,6 +1,8 @@
 import SideContent from "../components/sidecontent"
 import QuickCount from "../components/votes/quickCount"
 import InfoPaslon from "../components/votes/infoPaslon"
+import Address from '../components/address'
+import Footer from '../components/footer'
 
 function Vote() {
     return (

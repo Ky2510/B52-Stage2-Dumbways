@@ -17,11 +17,11 @@ function Navbar() {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item">
-                            <a className="nav-link text-light fs-4" aria-current="page" href="#">Partai</a>
+                            <a className="nav-link text-light fs-4" aria-current="page" href="/dashboard/partai">Partai</a>
                         </li>
                         <li className='nav-link text-light fs-4'>|</li>
                         <li className="nav-item">
-                            <a className="nav-link text-light fs-4" href="#">Paslon</a>
+                            <a className="nav-link text-light fs-4" href="/dashboard/paslon">Paslon</a>
                         </li>
                         <li className='nav-link text-light fs-4'>|</li>
                         <li className="nav-item">

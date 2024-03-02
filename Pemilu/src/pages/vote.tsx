@@ -22,6 +22,8 @@ function Vote() {
                 <InfoPaslon/>
             </div>
             <SideContent/>
+            <Address/>
+            <Footer />
         </>
     )
 }

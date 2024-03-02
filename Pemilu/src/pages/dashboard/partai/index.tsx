@@ -3,13 +3,14 @@ import imagePaslon from '../../../assets/imagePaslon.png'
 function IndexPartai() {
     return (
         <>
-            <div className="bg-white">
+            <div className="bg-white ">
                 <div className="row justify-content-center">
                     <div className="title text-center p-5 fs-1 fw-bold" style={{ color: "#5e5a00"}}>
                         LIST PARTAI
                     </div>
                     <div className="col-lg-8">
-                        <table className="table">
+                        <a href="add-partai" className="btn btn-lg text-light" style={{backgroundColor: "#5e5a00"}}>Add Partai</a>
+                        <table className="table mt-3">
                             <thead className="table-secondary">
                                 <tr className="text-center">
                                 <th scope="col">No. Urut</th>

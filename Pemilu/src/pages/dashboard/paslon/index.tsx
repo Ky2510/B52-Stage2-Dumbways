@@ -9,7 +9,8 @@ function IndexPaslon() {
                         LIST PASLON
                     </div>
                     <div className="col-lg-8">
-                        <table className="table">
+                        <a href="add-paslon" className="btn btn-lg text-light" style={{backgroundColor: "#5e5a00"}}>Add Paslon</a>
+                        <table className="table mt-3">
                             <thead className="table-secondary">
                                 <tr className="text-center">
                                 <th scope="col">No. Urut</th>

@@ -39,9 +39,9 @@ function App() {
 
   useEffect(() => {
     if (isLogin) {
-      navigate("/home")
-    } else {
-      navigate("/dashboard")
+      navigate("/")
+    } else if(isLoginDashboard) {
+      navigate("/dashboard")  
     }
   }, [isLogin, isLoginDashboard])
 
@@ -63,21 +63,20 @@ function App() {
 
   return (
     <Routes>
-        <Route path="home" element={<Home />} />
         <Route path="login" element={<Login handle={handleSetForm} login={login} />} />
-        <Route index element={<Home />} />
         <Route path="register" element={<Register />} />
           <Route path="/" element={<PrivateRouteDashboard />}>
-            <Route path="dashboard/*" element={<IndexDashboard />} />
-            <Route path="dashboard/paslon" element={<IndexPaslon />} />
-            <Route path="dashboard/add-paslon" element={<AddPaslon />} />
-            <Route path="dashboard/partai" element={<IndexPartai />} />
-            <Route path="dashboard/add-partai" element={<AddPartai />} />
+            <Route path="dashboard/" element={<IndexDashboard />} />
           </Route>
-        <Route path="/" element={<PrivateRoute />}>
-          <Route path="votes" element={<Votes />} />
-          <Route path="detail" element={<Detail />} />
-        </Route>
+          <Route path="dashboard/add-paslon" element={<AddPaslon />} />
+          <Route path="dashboard/add-partai" element={<AddPartai />} />
+          <Route path="dashboard/partai" element={<IndexPartai />} />
+          <Route path="dashboard/paslon" element={<IndexPaslon />} />
+          <Route path="/" element={<PrivateRoute />}>
+            <Route index element={<Home />} />
+          </Route>
+            <Route path="votes" element={<Votes />} />
+            <Route path="detail" element={<Detail />} />
     </Routes>
   )
 }

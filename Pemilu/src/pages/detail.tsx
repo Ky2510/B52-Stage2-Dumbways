@@ -1,6 +1,6 @@
-import TitleDetailContent from "../components/details/title"
-import ImageDetailContent from "../components/details/image"
-import DescriptionDetailContent from "../components/details/description"
+import TitleDetailContent from "../pages/user/detail/title"
+import ImageDetailContent from "../pages/user/detail/image"
+import DescriptionDetailContent from "../pages/user/detail/description"
 import Address from '../components/address'
 import Footer from '../components/footer'
 

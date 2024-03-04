@@ -1,4 +1,4 @@
-import detailImage from "../../assets/kpu.png"
+import detailImage from "../../../assets/kpu.png"
 
 function ImageDetailContent() {
     return(

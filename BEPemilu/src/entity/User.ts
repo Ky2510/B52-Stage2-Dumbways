@@ -4,14 +4,14 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
 export class User {
 
     @PrimaryGeneratedColumn()
-    id: number
+    id: Number
 
     @Column()
-    username: string
+    username: String    
 
     @Column()
-    password: string
+    password: String
 
-    @Column()
-    status: boolean
+    // @Column()
+    // status_vote: Boolean
 }

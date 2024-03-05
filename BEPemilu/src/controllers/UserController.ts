@@ -12,7 +12,7 @@ class UserController{
         }
     }
 
-    async find(req: Request, res: Response): Promise<Response>{
+    async getAll(req: Request, res: Response): Promise<Response>{
         try {
             const users = await UserServices.find()
             return res.status(200).json(users)

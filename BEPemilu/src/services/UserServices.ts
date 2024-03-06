@@ -1,8 +1,21 @@
 import { AppDataSource } from "../data-source"
 import { User } from "../entity/User" 
 
+enum Gender {
+    male = "Male",
+    female = "Female"
+}
+
+interface UserInterface {
+    fullname: string
+    username: string
+    password: string
+    gender: Gender
+    address: string
+}
+
 class UserService {
-    async create(reqBody: any): Promise<any>{
+    async create(reqBody: UserInterface): Promise<UserInterface>{
         try {
             const repository = AppDataSource.getRepository(User)
             const user = repository.create({
@@ -24,7 +37,7 @@ class UserService {
         }
     }
 
-    async find(): Promise<any>{
+    async find(): Promise<UserInterface[]>{
         try {
             const users = await AppDataSource.getRepository(User)
                                              .createQueryBuilder("user")
@@ -35,7 +48,7 @@ class UserService {
         }
     }
 
-    async update(reqBody: any, userId: number): Promise<any>{
+    async update(reqBody: UserInterface, userId: number): Promise<UserInterface>{
         try{
             const repository =  AppDataSource.createQueryBuilder()
             await repository.update(User)
@@ -47,18 +60,22 @@ class UserService {
             })
             .where("id = :id", { id: userId })
             .execute()
+
+            return
         } catch (error) {
             throw error
         }
     }
     
-    async delete(userId: number): Promise<any>{
+    async delete(userId: number): Promise<UserInterface>{
         try {
             const repository =  AppDataSource.createQueryBuilder()
             await repository.delete()
                             .from(User)
                             .where("id = :id", { id: userId })
                             .execute()
+
+            return 
         } catch (error) {
             throw error
         }

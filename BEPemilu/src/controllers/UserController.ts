@@ -1,6 +1,4 @@
 import { Request, Response } from "express"
-import { AppDataSource } from "../data-source"
-import { User } from "../entity/User"
 import UserServices from "../services/UserServices"
 import { UserValidator } from "../vendor/validator/user"
 

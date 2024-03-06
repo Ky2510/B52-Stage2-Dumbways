@@ -9,19 +9,19 @@ export enum Gender {
 export class User { 
     
     @PrimaryGeneratedColumn()
-    id: Number
+    id: number
     
     @Column()
-    fullname: String  
+    fullname: string  
     
     @Column()
-    address: String
+    address: string
     
     @Column()
-    username: String    
+    username: string    
     
     @Column()
-    password: String
+    password: string
     
     @Column({ nullable: true, type: "enum",  enum: Gender})
     gender: Gender

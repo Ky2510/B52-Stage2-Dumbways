@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
-import { Voter } from "./Voter"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from "typeorm"
+import { Partai } from "./Partai"
 
 @Entity()
 export class Paslon {
@@ -16,6 +16,9 @@ export class Paslon {
     @Column()
     vision_mission: String
 
-    @ManyToOne(() => Voter, (voter) => voter.paslon_id)
-    paslon: Voter
+    @OneToMany(() => Paslon, (paslon) => paslon.id)
+    paslon_id: Paslon[]
+
+    @ManyToOne(() => Partai, (partai) => partai.id)
+    partai: Partai
 }

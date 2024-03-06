@@ -1,5 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
-import { Voter } from "./Voter"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
 
 @Entity()
 export class Partai {
@@ -19,6 +18,6 @@ export class Partai {
     @Column()
     address: String
 
-    @ManyToOne(() => Voter, (voter) => voter.partai_id)
-    partai: Voter
+    @OneToMany(() => Partai, (partai) => partai.id )
+    partai_id: Partai[]
 }

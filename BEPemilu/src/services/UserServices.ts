@@ -25,12 +25,11 @@ class UserService {
                 address : reqBody.address,
                 gender  : reqBody.gender,
             })
-            await AppDataSource.getRepository(User)
-                               .createQueryBuilder()
-                               .insert()
-                               .into(User)
-                               .values(user)
-                               .execute()
+            await repository.createQueryBuilder()
+                            .insert()
+                            .into(User)
+                            .values(user)
+                            .execute()
             return user
         } catch (error) {
             throw error
@@ -39,9 +38,9 @@ class UserService {
 
     async find(): Promise<UserInterface[]>{
         try {
-            const users = await AppDataSource.getRepository(User)
-                                             .createQueryBuilder("user")
-                                             .getMany()
+            const repository = AppDataSource.getRepository(User)
+            const users = await repository.createQueryBuilder("user")
+                                          .getMany()
             return users
         } catch (error) {
             throw error

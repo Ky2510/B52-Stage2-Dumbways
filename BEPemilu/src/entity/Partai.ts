@@ -4,19 +4,19 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
 export class Partai {
 
     @PrimaryGeneratedColumn()
-    id: Number
+    id: number
 
     @Column()
-    name: String
+    name: string
 
     @Column()
-    chairman: String
+    chairman: string
 
     @Column()
-    vision_mission: String
+    vision_mission: string
 
     @Column()
-    address: String
+    address: string
 
     @OneToMany(() => Partai, (partai) => partai.id )
     partai_id: Partai[]

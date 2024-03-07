@@ -13,5 +13,8 @@ Route.delete("/user/delete/:id", UserController.delete)
 // partai
 Route.get("/partais", PartaiController.getAll)
 Route.post("/partai", PartaiController.create)
+Route.post("/partai/update/:id", PartaiController.update)
+Route.get("/partai/delete/:id", PartaiController.delete)
+
 
 export default Route

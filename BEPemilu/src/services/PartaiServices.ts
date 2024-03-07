@@ -1,5 +1,6 @@
 import { AppDataSource } from "../data-source"
 import { Partai } from "../entity/Partai"
+import { User } from "../entity/User"
 
 interface PartaiInterface {
     id            : number
@@ -10,14 +11,25 @@ interface PartaiInterface {
 }
 
 class PartaiServices {
+    async find(): Promise<PartaiInterface[]>{
+        try {
+            const repository = AppDataSource.getRepository(Partai)
+            const partais = await repository.createQueryBuilder("partai")
+                                      .getMany()
+            return partais
+        } catch (error) {
+            throw error
+        }
+    }
+
     async create(reqBody: PartaiInterface): Promise<PartaiInterface>{
         try {
             const repository = AppDataSource.getRepository(Partai)
             const partai = repository.create({
-                name : reqBody.name,
-                chairman : reqBody.chairman,
+                name           : reqBody.name,
+                chairman       : reqBody.chairman,
                 vision_mission : reqBody.vision_mission,
-                address : reqBody.address,
+                address        : reqBody.address,
             })
             
             await repository.createQueryBuilder()
@@ -31,12 +43,34 @@ class PartaiServices {
         }
     }
 
-    async find(): Promise<PartaiInterface[]>{
+    async update(reqBody: PartaiInterface, partaiId:number): Promise<PartaiInterface>{
         try {
-            const repository = AppDataSource.getRepository(Partai)
-            const partais = await repository.createQueryBuilder("partai")
-                                      .getMany()
-            return partais
+            const repository = AppDataSource.createQueryBuilder()
+            await repository.update(Partai)
+            .set({
+                name           : reqBody.name,
+                chairman       : reqBody.chairman,
+                vision_mission : reqBody.vision_mission,
+                address        : reqBody.address,
+            })
+            .where("id = :id", { id : partaiId})
+            .execute()
+
+            return
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async delete(partaiId: number): Promise<PartaiInterface>{
+        try {
+            const repository = AppDataSource.createQueryBuilder()
+            await repository.delete()
+                            .from(Partai)
+                            .where("id = :id", {id : partaiId})
+                            .execute()
+
+            return
         } catch (error) {
             throw error
         }

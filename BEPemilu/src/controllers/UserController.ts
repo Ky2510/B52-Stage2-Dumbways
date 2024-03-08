@@ -37,7 +37,7 @@ class UserController{
             if (error) {
                 return res.status(400).json({message: error.details[0].message })
             }
-            await UserServices.update(data, userId)
+            await UserServices.update(value, userId)
             return res.status(200).json({message: "update success"})
         } catch (error) {
             return res.status(500).json({ message: error })

@@ -21,7 +21,7 @@ class PartaiController {
                 return res.status(500).json({message: error.details[0].message})   
             }
 
-            await PartaiServices.create(data)
+            await PartaiServices.create(value)
             return res.status(200).json({message: "insert success"})
         } catch (error) {
             return res.status(500).json({message: error})
@@ -38,7 +38,7 @@ class PartaiController {
             }
 
             const partaiId = Number(req.params.id)
-            await PartaiServices.update(data, partaiId)
+            await PartaiServices.update(value, partaiId)
             return res.status(200).json({message: "update success"})
         } catch (error) {
             return res.status(500).json({message: error})

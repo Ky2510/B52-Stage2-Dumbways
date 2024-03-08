@@ -1,5 +1,4 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
-import { Paslon } from "./Paslon"
 
 @Entity()
 export class Voter {
@@ -12,7 +11,4 @@ export class Voter {
 
     @Column({default: false})
     status_vote: Boolean
-
-    @ManyToOne(() => Paslon, (paslon) => paslon.id)
-    paslon_id: Paslon
 }

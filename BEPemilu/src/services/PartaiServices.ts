@@ -1,22 +1,23 @@
 import { AppDataSource } from "../data-source"
 import { Partai } from "../entity/Partai"
-import { User } from "../entity/User"
 
 interface PartaiInterface {
-    id            : number
-    name          : string
-    chairman      : string
+    id: number
+    name: string
+    chairman: string
     vision_mission: string 
-    address       : string
+    address : string
+    paslonId?: number
 }
 
 class PartaiServices {
     async find(): Promise<PartaiInterface[]>{
         try {
             const repository = AppDataSource.getRepository(Partai)
-            const partais = await repository.createQueryBuilder("partai")
-                                      .getMany()
-            return partais
+            const partai =  await repository.createQueryBuilder("partai")
+                                    .leftJoinAndSelect("partai.paslon", "paslon") 
+                                    .getMany()
+            return partai
         } catch (error) {
             throw error
         }
@@ -26,10 +27,11 @@ class PartaiServices {
         try {
             const repository = AppDataSource.getRepository(Partai)
             const partai = repository.create({
-                name           : reqBody.name,
-                chairman       : reqBody.chairman,
-                vision_mission : reqBody.vision_mission,
-                address        : reqBody.address,
+                name: reqBody.name,
+                chairman: reqBody.chairman,
+                vision_mission: reqBody.vision_mission,
+                address: reqBody.address,
+                paslon: { id: reqBody.paslonId } 
             })
             
             await repository.createQueryBuilder()
@@ -37,7 +39,7 @@ class PartaiServices {
                             .into(Partai)
                             .values(partai)
                             .execute()
-            return partai
+            return
         } catch (error) {
             throw error
         }

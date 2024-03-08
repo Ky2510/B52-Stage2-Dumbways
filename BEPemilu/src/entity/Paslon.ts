@@ -5,20 +5,17 @@ import { Partai } from "./Partai"
 export class Paslon {
 
     @PrimaryGeneratedColumn()
-    id: Number
+    id: number
 
     @Column()
-    name: String
+    name: string
 
     @Column()
-    serial_number: String
+    serial_number: string
 
     @Column()
-    vision_mission: String
+    vision_mission: string
 
-    @OneToMany(() => Paslon, (paslon) => paslon.id)
-    paslon_id: Paslon[]
-
-    @ManyToOne(() => Partai, (partai) => partai.id)
-    partai: Partai
+    @OneToMany(() => Partai, (partai) => partai.paslon)
+    partai: Partai[]
 }

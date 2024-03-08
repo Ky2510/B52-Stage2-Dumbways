@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from "typeorm"
+import { Paslon } from "./Paslon"
 
 @Entity()
 export class Partai {
@@ -18,6 +19,6 @@ export class Partai {
     @Column()
     address: string
 
-    @OneToMany(() => Partai, (partai) => partai.id )
-    partai_id: Partai[]
+    @ManyToOne(() => Paslon, (paslon) => paslon.partai)
+    paslon: Paslon 
 }

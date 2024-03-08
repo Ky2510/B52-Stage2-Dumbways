@@ -47,8 +47,8 @@ class PartaiController {
 
     async delete(req: Request, res: Response): Promise<Response>{
         try {
-            const userId = Number(req.params.id)
-            await PartaiServices.delete(userId)
+            const partaiId = Number(req.params.id)
+            await PartaiServices.delete(partaiId)
             return res.status(200).json({message: "delete success"})
         } catch (error) {
             return res.status(500).json({message: error})

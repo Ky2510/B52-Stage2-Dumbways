@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm"
+import { Paslon } from "./Paslon"
 
 @Entity()
 export class Voter {
@@ -11,4 +12,7 @@ export class Voter {
 
     @Column({default: false})
     status_vote: Boolean
+
+    @ManyToOne(() => Paslon, (paslon) => paslon.voter)
+    paslon: Paslon
 }

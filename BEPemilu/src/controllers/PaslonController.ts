@@ -1,11 +1,11 @@
 import { Request, Response } from "express"
 import PaslonServices from "../services/PaslonServices"
+import { PaslonValidator } from "../vendor/validator/Paslon"
 
 class PaslonController {
     async getAll(req: Request, res:Response): Promise<Response>{
         try {
             const paslons = await PaslonServices.find()
-            console.log(paslons)
             return res.status(200).json(paslons)
         } catch (error) {
             return res.status(500).json({message: error})
@@ -15,11 +15,11 @@ class PaslonController {
     async create(req: Request, res: Response): Promise<Response>{
         try {
             const data = req.body
-            // const {error, value} = PartaiValidator.validate(data)
-            // if (error) {
-            //     return res.status(500).json({message: error.details[0].message})   
-            // }
-            await PaslonServices.create(data)
+            const {error, value} = PaslonValidator.validate(data)
+            if (error) {
+                return res.status(500).json({message: error.details[0].message})   
+            }
+            await PaslonServices.create(value)
             return res.status(200).json({message: "insert success"})
         } catch (error) {
             return res.status(500).json({message: error})
@@ -29,14 +29,12 @@ class PaslonController {
     async update(req: Request, res: Response): Promise<Response>{
         try {
             const data = req.body
-            
-            // const {error, value} = PaslonVa.validate(data)
-            // if (error) {
-            //     return res.status(500).json({message: error.details[0].message})   
-            // }
-
+            const {error, value} = PaslonValidator.validate(data)
+            if (error) {
+                return res.status(500).json({message: error.details[0].message})   
+            }
             const paslonId = Number(req.params.id)
-            await PaslonServices.update(data, paslonId)
+            await PaslonServices.update(value, paslonId)
             return res.status(200).json({message: "update success"})
         } catch (error) {
             return res.status(500).json({message: error})

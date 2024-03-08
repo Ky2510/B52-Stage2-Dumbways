@@ -11,8 +11,24 @@ import AddPaslon from "./pages/dashboard/paslon/add"
 import AddPartai from "./pages/dashboard/partai/add"
 import IndexPartai from "./pages/dashboard/partai"
 import IndexPaslon from "./pages/dashboard/paslon"
+import * as React from "react"
 
 function App() {
+  const findUsers = async ()=> {
+    try {
+      const response = await fetch("http://localhost:3000/api/v1/voters")
+
+      console.log(await response.json());
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  React.useEffect(() => {
+    findUsers()
+  }, [])
+
+
   const navigate = useNavigate()
   const [isLogin, setIsLogin] = useState<Boolean>(false)
   const [isLoginDashboard, setIsLoginDashboard] = useState<Boolean>(false)

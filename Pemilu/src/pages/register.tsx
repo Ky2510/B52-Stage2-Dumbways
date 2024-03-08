@@ -7,7 +7,7 @@ function Register() {
                 <div className="col-lg-8">
                     <div className="bg-light">
                         <div className="container">
-                            <div className="title p-4 text-center fs-1 fw-bold" style={{ color: "#5e5a00"}}>REGISTER</div>
+                            <div className="title p-4 text-center fs-2 fw-bold" style={{ color: "#5e5a00"}}>REGISTER</div>
                             <FormRegister/>
                         </div>
                     </div>

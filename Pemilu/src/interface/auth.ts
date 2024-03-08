@@ -1,6 +1,12 @@
-interface TypeDataAuth {
+export default interface TypeDataAuth {
     username: string
     password: string
 }
 
-export default TypeDataAuth
+export interface TypeDataRegister {
+    fullname: string
+    username: string
+    password: string
+    address : string
+    gender  : string
+}

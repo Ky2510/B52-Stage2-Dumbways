@@ -5,6 +5,11 @@ export enum Gender {
     female = "Female"
 }
 
+export enum Role {
+    admin = "admin",
+    user = "user",
+}
+
 @Entity()
 export class User { 
     
@@ -23,6 +28,9 @@ export class User {
     @Column()
     password: string
     
+    @Column({ nullable: true, type: "enum",  enum: Role})
+    role: Role
+
     @Column({ nullable: true, type: "enum",  enum: Gender})
     gender: Gender
 }

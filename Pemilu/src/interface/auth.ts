@@ -9,4 +9,5 @@ export interface TypeDataRegister {
     password: string
     address : string
     gender  : string
+    role : string
 }

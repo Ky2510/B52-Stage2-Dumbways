@@ -6,12 +6,18 @@ enum Gender {
     female = "Female"
 }
 
+enum Role {
+    admin = "admin",
+    user = "user",
+}
+
 interface UserInterface {
     fullname: string
     username: string
     password: string
     gender: Gender
     address: string
+    role: Role
 }
 
 class UserService {
@@ -24,6 +30,7 @@ class UserService {
                 fullname: reqBody.fullname,
                 address : reqBody.address,
                 gender  : reqBody.gender,
+                role : reqBody.role
             })
             await repository.createQueryBuilder()
                             .insert()

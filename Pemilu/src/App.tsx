@@ -1,6 +1,6 @@
 import { Navigate, Outlet, Route, Routes, useNavigate } from "react-router-dom"
 import { useState, ChangeEvent, useEffect } from "react"
-import TypeDataAuth from "./interface/auth"
+import TypeDataAuth, { TypeDataRegister } from "./interface/auth"
 import Home from './pages/home'
 import Votes from './pages/vote'
 import Detail from "./pages/detail"
@@ -14,13 +14,13 @@ import IndexPaslon from "./pages/dashboard/paslon"
 import * as React from "react"
 
 function App() {
+  // Users
   const findUsers = async ()=> {
     try {
-      const response = await fetch("http://localhost:3000/api/v1/voters")
-
-      console.log(await response.json());
+      const response = await fetch("http://localhost:3000/api/v1/users")
+      console.log(await response.json())
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
 
@@ -30,6 +30,45 @@ function App() {
 
 
   const navigate = useNavigate()
+  const [register, setRegister] = useState<TypeDataRegister>({
+    fullname: "",
+    username: "",
+    password: "",
+    address : "",
+    gender  : "",
+    role : "user", 
+  })
+
+  const handleSetRegister = (event: ChangeEvent<HTMLInputElement>): void => {
+    setRegister({
+      ...register,
+      [event.target.name]: event.target.value
+    })
+  }
+
+  const insertUser = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    try {
+      console.log(register)
+      const response = await fetch("http://localhost:3000/api/v1/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(register)
+      })
+      if (response.ok) {
+        const data = await response.json()
+          setRegister(data.message)
+      } else {
+          const errorData = await response.json()
+          setRegister(errorData.error)
+      }
+    } catch (error) {
+      console.error("Error registering user:", error)
+    }
+  }
+
   const [isLogin, setIsLogin] = useState<Boolean>(false)
   const [isLoginDashboard, setIsLoginDashboard] = useState<Boolean>(false)
   const [form, setForm] = useState<TypeDataAuth>({
@@ -80,7 +119,7 @@ function App() {
   return (
     <Routes>
         <Route path="login" element={<Login handle={handleSetForm} login={login} />} />
-        <Route path="register" element={<Register />} />
+        <Route path="register" element={<Register handle={handleSetRegister} register={register} handleSubmitUser={insertUser}  />} />
           <Route path="/" element={<PrivateRouteDashboard />}>
             <Route path="dashboard/" element={<IndexDashboard />} />
           </Route>

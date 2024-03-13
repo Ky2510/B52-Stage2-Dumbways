@@ -1,4 +1,5 @@
 import * as express from "express"
+import ArticleController from "../controllers/ArticleController"
 import PartaiController from "../controllers/PartaiController"
 import PaslonController from "../controllers/PaslonController"
 import UserController from "../controllers/UserController"
@@ -11,6 +12,10 @@ Route.get("/users", UserController.getAll)
 Route.post("/user", UserController.create)
 Route.post("/user/update/:id", UserController.update)
 Route.delete("/user/delete/:id", UserController.delete)
+
+// article
+Route.get("/articles", ArticleController.getAll)
+Route.post("/article", ArticleController.create)
 
 // partai
 Route.get("/partais", PartaiController.getAll)

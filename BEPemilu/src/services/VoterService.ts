@@ -14,7 +14,10 @@ class VoterServices {
             const repository = AppDataSource.getRepository(Voter)
             const vote =  await repository.createQueryBuilder("voter")
                                     .leftJoinAndSelect("voter.paslon", "paslon") 
+                                    .leftJoinAndSelect("voter.paslon", "partai")
                                     .execute()
+                                    
+            
             return vote
         } catch (error) {
             throw error

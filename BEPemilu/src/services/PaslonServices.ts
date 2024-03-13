@@ -49,10 +49,8 @@ class PaslonServices {
                 serial_number  : reqBody.serial_number,
                 vision_mission : reqBody.vision_mission,
             })
-
             .where("id = :id", { id : paslonId})
             .execute()
-
             return
         } catch (error) {
             throw error

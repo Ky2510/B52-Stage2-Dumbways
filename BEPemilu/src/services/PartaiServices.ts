@@ -39,7 +39,7 @@ class PartaiServices {
                             .into(Partai)
                             .values(partai)
                             .execute()
-            return
+            return partai
         } catch (error) {
             throw error
         }
@@ -48,7 +48,7 @@ class PartaiServices {
     async update(reqBody: PartaiInterface, partaiId:number): Promise<PartaiInterface>{
         try {
             const repository = AppDataSource.createQueryBuilder()
-            await repository.update(Partai)
+           await repository.update(Partai)
             .set({
                 name           : reqBody.name,
                 chairman       : reqBody.chairman,
@@ -58,7 +58,7 @@ class PartaiServices {
             .where("id = :id", { id : partaiId})
             .execute()
 
-            return
+            return 
         } catch (error) {
             throw error
         }

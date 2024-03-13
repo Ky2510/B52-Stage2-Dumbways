@@ -1,6 +1,5 @@
 import * as React from "react"
 import { useState } from "react"
-// import FormRegister from "../components/register/form"
 import { TypeDataRegister } from "../interface/auth"
 
 interface handleRegister {

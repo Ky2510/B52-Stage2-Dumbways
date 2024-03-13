@@ -18,7 +18,9 @@ function App() {
   const findUsers = async ()=> {
     try {
       const response = await fetch("http://localhost:3000/api/v1/users")
-      console.log(await response.json())
+      const users = await response.json()
+      console.log(users)
+      return users
     } catch (error) {
       console.log(error)
     }
@@ -34,9 +36,9 @@ function App() {
     fullname: "",
     username: "",
     password: "",
-    address : "",
-    gender  : "",
-    role : "user", 
+    address: "",
+    gender: "",
+    role: "user", 
   })
 
   const handleSetRegister = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -119,7 +121,10 @@ function App() {
   return (
     <Routes>
         <Route path="login" element={<Login handle={handleSetForm} login={login} />} />
-        <Route path="register" element={<Register handle={handleSetRegister} register={register} handleSubmitUser={insertUser}  />} />
+        <Route path="register" element={ <Register handle={handleSetRegister}
+                                                   register={register}
+                                                   handleSubmitUser={insertUser} 
+                                        />}/>
           <Route path="/" element={<PrivateRouteDashboard />}>
             <Route path="dashboard/" element={<IndexDashboard />} />
           </Route>

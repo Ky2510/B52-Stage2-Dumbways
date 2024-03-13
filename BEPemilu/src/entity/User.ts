@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm"
+import { Article } from "./Article"
 
 export enum Gender {
     male = "Male",
@@ -33,4 +34,7 @@ export class User {
 
     @Column({ nullable: true, type: "enum",  enum: Gender})
     gender: Gender
+
+    @OneToMany(() => Article, (article) => article.user)
+    article: Article[]
 }

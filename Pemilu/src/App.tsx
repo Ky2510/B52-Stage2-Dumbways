@@ -12,15 +12,14 @@ import AddPartai from "./pages/dashboard/partai/add"
 import IndexPartai from "./pages/dashboard/partai"
 import IndexPaslon from "./pages/dashboard/paslon"
 import * as React from "react"
+import TypeDataPaslon from "./interface/dashboard"
 
 function App() {
   // Users
   const findUsers = async ()=> {
     try {
       const response = await fetch("http://localhost:3000/api/v1/users")
-      const users = await response.json()
-      console.log(users)
-      return users
+      const userData = await response.json()
     } catch (error) {
       console.log(error)
     }
@@ -30,8 +29,8 @@ function App() {
     findUsers()
   }, [])
 
-
   const navigate = useNavigate()
+
   const [register, setRegister] = useState<TypeDataRegister>({
     fullname: "",
     username: "",
@@ -71,6 +70,44 @@ function App() {
     }
   }
 
+  // Paslon
+  const [paslon, setPaslon] = useState<TypeDataPaslon>({
+      name: "",
+      serial_number: "",
+      vision_mission: ""
+  })
+  
+  const handleSetPaslon = (event: ChangeEvent<HTMLInputElement>): void => {
+    setPaslon({
+      ...paslon,
+      [event.target.name]: event.target.value
+    })
+  }
+
+  const insertPaslon = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    try {
+      console.log([paslon])
+      const response = await fetch("http://localhost:3000/api/v1/paslon", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(paslon)
+      })
+      if (response.ok) {
+        const data = await response.json()
+          setPaslon(data.message)
+      } else {
+          const errorData = await response.json()
+          setPaslon(errorData.error)
+      }
+    } catch (error) {
+      console.error("Error insert paslon:", error)
+    }
+  }
+
+  // Login
   const [isLogin, setIsLogin] = useState<Boolean>(false)
   const [isLoginDashboard, setIsLoginDashboard] = useState<Boolean>(false)
   const [form, setForm] = useState<TypeDataAuth>({
@@ -102,41 +139,40 @@ function App() {
     }
   }, [isLogin, isLoginDashboard])
 
-  function PrivateRouteDashboard() {
-    if (isLoginDashboard) {
-      return <Outlet />
-    } else {
-      return <Navigate to="/login" />
-    }
-  }
+  // function PrivateRouteDashboard() {
+  //   if (isLoginDashboard) {
+  //     return <Outlet />
+  //   } else {
+  //     return <Navigate to="/login" />
+  //   }
+  // }
   
-  function PrivateRoute() {
-    if (isLogin) {
-      return <Outlet />
-    } else {
-      return <Navigate to="/login" />
-    }
-  }
+  // function PrivateRoute() {
+  //   if (isLogin) {
+  //     return <Outlet />
+  //   } else {
+  //     return <Navigate to="/login" />
+  //   }
+  // }
 
   return (
     <Routes>
         <Route path="login" element={<Login handle={handleSetForm} login={login} />} />
         <Route path="register" element={ <Register handle={handleSetRegister}
                                                    register={register}
-                                                   handleSubmitUser={insertUser} 
+                                                   handleSubmitUser={insertUser}
                                         />}/>
-          <Route path="/" element={<PrivateRouteDashboard />}>
-            <Route path="dashboard/" element={<IndexDashboard />} />
-          </Route>
-          <Route path="dashboard/add-paslon" element={<AddPaslon />} />
-          <Route path="dashboard/add-partai" element={<AddPartai />} />
-          <Route path="dashboard/partai" element={<IndexPartai />} />
-          <Route path="dashboard/paslon" element={<IndexPaslon />} />
-          <Route path="/" element={<PrivateRoute />}>
-            <Route index element={<Home />} />
-          </Route>
-            <Route path="votes" element={<Votes />} />
-            <Route path="detail" element={<Detail />} />
+        <Route path="dashboard/" element={<IndexDashboard />} />
+        <Route path="dashboard/add-paslon" element={<AddPaslon handle={handleSetPaslon} 
+                                                               paslon={paslon}
+                                                               handleSubmitPaslon={insertPaslon}
+                                        />} />
+        <Route path="dashboard/add-partai" element={<AddPartai />} />
+        <Route path="dashboard/partai" element={<IndexPartai />} />
+        <Route path="dashboard/paslon" element={<IndexPaslon />} />
+        <Route index element={<Home />} />
+        <Route path="votes" element={<Votes />} />
+        <Route path="detail" element={<Detail />} />
     </Routes>
   )
 }

@@ -1,6 +1,28 @@
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 import imagePaslon from '../../../assets/imagePaslon.png'
+import TypeDataPaslon from '../../../interface/dashboard'
 
 function IndexPaslon() {
+    const [paslons, setPaslon] = useState<TypeDataPaslon[]>([])
+    useEffect(() => {
+        findPaslons()
+    }, [])
+
+    const findPaslons = async ()=> {
+        try {
+          const response = await fetch("http://localhost:3000/api/v1/paslons")
+          const paslonData = await response.json()
+          setPaslon(paslonData)
+          console.log(paslonData)
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      React.useEffect(() => {
+        findPaslons()
+    }, [])
+    
     return (
         <>
             <div className="bg-white">
@@ -21,20 +43,17 @@ function IndexPaslon() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row" className="text-center">1</th>
+                            {paslons.map((paslon, index) => (
+                                <tr key={index}>
+                                    <th scope="row" className="text-center">{index + 1}</th>
                                     <td className="text-center"><img src={imagePaslon} style={{height: "100px"}} alt="" srcSet="" /></td>
-                                    <td className="text-center">Miya Junggler</td>
-                                    <td>
-                                        <ul>
-                                            Visi & Misi
-                                            <li>Memindahkan Indonesia ke Isekai</li>
-                                            <li>Nonton anime 3x sehari</li>
-                                            <li>Melakukan peresapan pada budaya Jepang</li>
-                                        </ul>
+                                    <td className="text-center">{paslon.name}</td>
+                                    <td className="text-center">
+                                        {paslon.vision_mission}
                                     </td>
                                     <td className="text-center">Kerajaan Black Clover</td>
                                 </tr>
+                            ))}
                             </tbody>
                         </table>
                     </div>

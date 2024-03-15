@@ -11,8 +11,8 @@ import AddPaslon from "./pages/dashboard/paslon/add"
 import AddPartai from "./pages/dashboard/partai/add"
 import IndexPartai from "./pages/dashboard/partai"
 import IndexPaslon from "./pages/dashboard/paslon"
+import useInsertPaslon from "./mocks/paslon"
 import * as React from "react"
-import TypeDataPaslon from "./interface/dashboard"
 
 function App() {
   // Users
@@ -47,64 +47,7 @@ function App() {
     })
   }
 
-  const insertUser = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    try {
-      const response = await fetch("http://localhost:3000/api/v1/user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(register)
-      })
-      if (response.ok) {
-        const data = await response.json()
-          setRegister(data.message)
-      } else {
-          const errorData = await response.json()
-          setRegister(errorData.error)
-      }
-    } catch (error) {
-      console.error("Error registering user:", error)
-    }
-  }
-
-  // Paslon
-  const [paslon, setPaslon] = useState<TypeDataPaslon>({
-      name: "",
-      serial_number: "",
-      vision_mission: ""
-  })
-  
-  const handleSetPaslon = (event: ChangeEvent<HTMLInputElement>): void => {
-    setPaslon({
-      ...paslon,
-      [event.target.name]: event.target.value
-    })
-  }
-
-  const insertPaslon = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    try {
-      const response = await fetch("http://localhost:3000/api/v1/paslon", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(paslon)
-      })
-      if (response.ok) {
-          const data = await response.json()
-          setPaslon(data.message)
-          console.log("insert paslon success")
-      } else {
-          const errorData = await response.json()
-          setPaslon(errorData.error)
-      }
-    } catch (error) {
-      console.error("Error insert paslon:", error)
-    }
-  }
+  const { paslon, handleSetPaslon, insertPaslon } = useInsertPaslon()
 
   // Login
   const [isLogin, setIsLogin] = useState<Boolean>(false)
@@ -159,7 +102,7 @@ function App() {
         <Route path="login" element={<Login handle={handleSetForm} login={login} />} />
         <Route path="register" element={ <Register handle={handleSetRegister}
                                                    register={register}
-                                                   handleSubmitUser={insertUser}
+                                                   handleSubmitUser={insertPaslon}
                                         />}/>
         <Route path="dashboard/" element={<IndexDashboard />} />
         <Route path="dashboard/add-paslon" element={<AddPaslon handle={handleSetPaslon} 

@@ -27,7 +27,7 @@ Route.get("/partai/delete/:id", PartaiController.delete)
 Route.get("/paslons", PaslonController.getAll)
 Route.post("/paslon", PaslonController.create)
 Route.post("/paslon/update/:id", PaslonController.update)
-Route.get("/paslon/delete/:id", PaslonController.delete)
+Route.delete("/paslon/delete/:id", PaslonController.delete)
 
 // voter
 Route.get("/voters", VoterController.getAll)

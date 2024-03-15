@@ -26,7 +26,7 @@ class PaslonServices {
             const paslon = repository.create({
                 name           : reqBody.name,
                 serial_number  : reqBody.serial_number,
-                vision_mission : reqBody.vision_mission,
+                vision_mission : reqBody.vision_mission,    
             })
             
             await repository.createQueryBuilder()
@@ -57,15 +57,15 @@ class PaslonServices {
         }
     }
 
-    async delete(paslonId: number): Promise<PaslonInterface>{
+    async delete(paslonId: number): Promise<PaslonInterface | null>{
         try {
             const repository = AppDataSource.createQueryBuilder()
             await repository.delete()
                             .from(Paslon)
                             .where("id = :id", {id : paslonId})
                             .execute()
-
-            return
+            
+            return 
         } catch (error) {
             throw error
         }

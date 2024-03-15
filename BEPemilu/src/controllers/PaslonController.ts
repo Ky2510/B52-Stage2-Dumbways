@@ -43,11 +43,14 @@ class PaslonController {
 
     async delete(req: Request, res: Response): Promise<Response>{
         try {
-            const userId = Number(req.params.id)
-            await PaslonServices.delete(userId)
+            const paslonId  = Number(req.params.id)
+            const deletedPaslon = await PaslonServices.delete(paslonId)
+            if (!deletedPaslon) {
+                return res.status(404).json({ message: "Paslon not found" })
+            }
             return res.status(200).json({message: "delete success"})
         } catch (error) {
-            return res.status(500).json({message: error})
+            return res.status(500).json({message: error.message})
         }
     }
 }

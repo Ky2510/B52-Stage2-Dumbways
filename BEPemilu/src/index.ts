@@ -7,7 +7,7 @@ AppDataSource.initialize().then(async () => {
     const app = express()
     const port = 3000
 
-    var corsOptions = {
+    const corsOptions = {
         origin: "http://localhost:5173"
     }
 

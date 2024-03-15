@@ -5,9 +5,6 @@ import TypeDataPaslon from '../../../interface/dashboard'
 
 function IndexPaslon() {
     const [paslons, setPaslon] = useState<TypeDataPaslon[]>([])
-    useEffect(() => {
-        findPaslons()
-    }, [])
 
     const findPaslons = async ()=> {
         try {

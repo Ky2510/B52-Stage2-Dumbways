@@ -1,4 +1,4 @@
-import { Navigate, Outlet, Route, Routes, useNavigate } from "react-router-dom"
+import { Route, Routes, useNavigate } from "react-router-dom"
 import { useState, ChangeEvent, useEffect } from "react"
 import TypeDataAuth, { TypeDataRegister } from "./interface/auth"
 import Home from './pages/home'
@@ -19,7 +19,7 @@ function App() {
   const findUsers = async ()=> {
     try {
       const response = await fetch("http://localhost:3000/api/v1/users")
-      const userData = await response.json()
+      await response.json()
     } catch (error) {
       console.log(error)
     }
@@ -87,7 +87,6 @@ function App() {
   const insertPaslon = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
-      console.log([paslon])
       const response = await fetch("http://localhost:3000/api/v1/paslon", {
         method: "POST",
         headers: {

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import imagePaslon from '../../../assets/imagePaslon.png'
 import TypeDataPaslon from '../../../interface/dashboard'
 
@@ -56,9 +57,9 @@ function AddPaslon(props: handleRegister) {
                                                             className="form-control border border-2 border-secondary" 
                                                             name="vision_mission" 
                                                             id="vision_mission" 
+                                                            onChange={props.handle}
                                                             style={{height: "200px"}}
-                                                            onChange={props.handle}>
-                                                        </textarea>
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>

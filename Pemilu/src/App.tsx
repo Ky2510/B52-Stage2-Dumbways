@@ -50,7 +50,6 @@ function App() {
   const insertUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
-      console.log(register)
       const response = await fetch("http://localhost:3000/api/v1/user", {
         method: "POST",
         headers: {
@@ -95,8 +94,9 @@ function App() {
         body: JSON.stringify(paslon)
       })
       if (response.ok) {
-        const data = await response.json()
+          const data = await response.json()
           setPaslon(data.message)
+          console.log("insert paslon success")
       } else {
           const errorData = await response.json()
           setPaslon(errorData.error)

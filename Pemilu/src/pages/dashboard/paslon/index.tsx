@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import axios from 'axios'
 import imagePaslon from '../../../assets/imagePaslon.png'
 import TypeDataPaslon from '../../../interface/dashboard'
 
@@ -7,10 +8,10 @@ function IndexPaslon() {
 
     const findPaslons = async ()=> {
         try {
-          const response = await fetch("http://localhost:3000/api/v1/paslons")
-          const paslonData = await response.json()
-          setPaslon(paslonData)
-          console.log(paslonData)
+          const response = await axios.get("http://localhost:3000/api/v1/paslons")
+          const data = response.data
+          setPaslon(data)
+
         } catch (error) {
           console.log(error)
         }
@@ -18,6 +19,19 @@ function IndexPaslon() {
       useEffect(() => {
         findPaslons()
     }, [])
+
+    const deleteData = async (id:number) => {
+        try {
+            const response = await axios.delete(`http://localhost:3000/api/v1/paslon/delete/${id}`)
+            const data = response.data
+            setPaslon(data)
+            console.log("success deleted")
+            findPaslons()
+        } catch (error) {
+            console.log(error, "error data deleted")
+        }
+
+    }
     
     return (
         <>
@@ -35,19 +49,21 @@ function IndexPaslon() {
                                 <th scope="col">Logo</th>
                                 <th scope="col">Ketua Umum</th>
                                 <th scope="col">Visi & Misi</th>
-                                <th scope="col">Alamat</th>
+                                <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
                             {paslons.map((paslon, index) => (
                                 <tr key={index}>
-                                    <th scope="row" className="text-center">{index + 1}</th>
+                                    <th scope="row" className="text-center">{paslon.serial_number}</th>
                                     <td className="text-center"><img src={imagePaslon} style={{height: "100px"}} alt="" srcSet="" /></td>
-                                    <td className="text-center">{paslon.name}</td>
+                                    <td className="text-center">{paslon.name},</td>
                                     <td className="text-center">
                                         {paslon.vision_mission}
                                     </td>
-                                    <td className="text-center">Kerajaan Black Clover</td>
+                                    <td className="text-center">
+                                        <a href="">Edit</a> | <button onClick={() => deleteData(paslon.id)}>Hapus</button>
+                                    </td>
                                 </tr>
                             ))}
                             </tbody>

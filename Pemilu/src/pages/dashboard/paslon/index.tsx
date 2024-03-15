@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { useEffect, useState } from 'react'
 import imagePaslon from '../../../assets/imagePaslon.png'
 import TypeDataPaslon from '../../../interface/dashboard'
@@ -16,7 +15,7 @@ function IndexPaslon() {
           console.log(error)
         }
       }
-      React.useEffect(() => {
+      useEffect(() => {
         findPaslons()
     }, [])
     

@@ -1,38 +1,8 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
 import imagePaslon from '../../../assets/imagePaslon.png'
-import TypeDataPaslon from '../../../interface/dashboard'
+import usePaslon from '../../../mocks/paslon'
 
 function IndexPaslon() {
-    const [paslons, setPaslon] = useState<TypeDataPaslon[]>([])
-
-    const findPaslons = async ()=> {
-        try {
-          const response = await axios.get("http://localhost:3000/api/v1/paslons")
-          const data = response.data
-          setPaslon(data)
-
-        } catch (error) {
-          console.log(error)
-        }
-      }
-      useEffect(() => {
-        findPaslons()
-    }, [])
-
-    const deleteData = async (id:number) => {
-        try {
-            const response = await axios.delete(`http://localhost:3000/api/v1/paslon/delete/${id}`)
-            const data = response.data
-            setPaslon(data)
-            console.log("success deleted")
-            findPaslons()
-        } catch (error) {
-            console.log(error, "error data deleted")
-        }
-
-    }
-    
+    const { paslons, deleteData } = usePaslon()
     return (
         <>
             <div className="bg-white">

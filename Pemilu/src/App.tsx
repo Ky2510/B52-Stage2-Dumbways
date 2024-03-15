@@ -1,6 +1,6 @@
 import { Route, Routes, useNavigate } from "react-router-dom"
 import { useState, ChangeEvent, useEffect } from "react"
-import TypeDataAuth, { TypeDataRegister } from "./interface/auth"
+import TypeDataAuth from "./interface/auth"
 import Home from './pages/home'
 import Votes from './pages/vote'
 import Detail from "./pages/detail"
@@ -11,8 +11,9 @@ import AddPaslon from "./pages/dashboard/paslon/add"
 import AddPartai from "./pages/dashboard/partai/add"
 import IndexPartai from "./pages/dashboard/partai"
 import IndexPaslon from "./pages/dashboard/paslon"
-import useInsertPaslon from "./mocks/paslon"
+import usePaslon from "./mocks/paslon"
 import * as React from "react"
+import useUser from "./mocks/user"
 
 function App() {
   // Users
@@ -30,24 +31,9 @@ function App() {
   }, [])
 
   const navigate = useNavigate()
-
-  const [register, setRegister] = useState<TypeDataRegister>({
-    fullname: "",
-    username: "",
-    password: "",
-    address: "",
-    gender: "",
-    role: "user", 
-  })
-
-  const handleSetRegister = (event: ChangeEvent<HTMLInputElement>): void => {
-    setRegister({
-      ...register,
-      [event.target.name]: event.target.value
-    })
-  }
-
-  const { paslon, handleSetPaslon, insertPaslon } = useInsertPaslon()
+  
+  const { register, handleSetRegister, insertUser } = useUser()
+  const { paslon, handleSetPaslon, insertPaslon } = usePaslon()
 
   // Login
   const [isLogin, setIsLogin] = useState<Boolean>(false)
@@ -102,7 +88,7 @@ function App() {
         <Route path="login" element={<Login handle={handleSetForm} login={login} />} />
         <Route path="register" element={ <Register handle={handleSetRegister}
                                                    register={register}
-                                                   handleSubmitUser={insertPaslon}
+                                                   handleSubmitUser={insertUser}
                                         />}/>
         <Route path="dashboard/" element={<IndexDashboard />} />
         <Route path="dashboard/add-paslon" element={<AddPaslon handle={handleSetPaslon} 
